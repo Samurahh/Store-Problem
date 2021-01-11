@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FileReader {
+public class FileReader implements FileReaderInterface {
 
     private BufferedReader reader;
 
+    @Override
     public ArrayList<String> getShoppingList() {
         ArrayList<String> items = new ArrayList<>();
         String line;
@@ -26,6 +27,7 @@ public class FileReader {
         return items;
     }
 
+    @Override
     public boolean initialize(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {
