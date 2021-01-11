@@ -8,6 +8,10 @@ public class ShoppingListReader implements FileReaderInterface {
 
     private BufferedReader reader;
 
+    public ShoppingListReader(String filePath) {
+        initialize(filePath);
+    }
+
     @Override
     public ArrayList<String> getShoppingList() {
         ArrayList<String> items = new ArrayList<>();
