@@ -1,4 +1,35 @@
 public class Store implements StoreInterface {
 
+    private HashMap<String, Integer> products;
+
+    public Store() {
+        products = new HashMap<>();
+    }
+
+    public int getCost(String product) {
+
+        int cost = 0;
+        HashMap<String, Integer> products = (HashMap<String, Integer>) getItems();
+
+        if(doesItemExist(product)) {
+            cost = products.get(product);
+        }
+
+        return cost;
+    }
+
+    public int getCost(Collection<String> products) {
+
+        int totalCost = 0;
+        HashMap<String, Integer> productInventory = (HashMap<String, Integer>) getItems();
+
+        for(String product:products) {
+            if(doesItemExist(product)) {
+                totalCost += productInventory.get(product);
+            }
+        }
+
+        return totalCost;
+    }
 
 }
