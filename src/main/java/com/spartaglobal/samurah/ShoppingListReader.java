@@ -1,13 +1,10 @@
 package com.spartaglobal.samurah;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FileReader implements FileReaderInterface {
+public class ShoppingListReader implements FileReaderInterface {
 
     private BufferedReader reader;
 
@@ -32,7 +29,7 @@ public class FileReader implements FileReaderInterface {
         File file = new File(filePath);
         if (file.exists()) {
             try {
-                reader = new BufferedReader(new java.io.FileReader(file));
+                reader = new BufferedReader(new FileReader(file));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 return false;
