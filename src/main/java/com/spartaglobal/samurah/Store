@@ -1,11 +1,5 @@
 public class Store implements StoreInterface {
-
-    private HashMap<String, Integer> products;
-
-    public Store() {
-        products = new HashMap<>();
-    }
-
+    
     public int getCost(String product) {
 
         int cost = 0;
@@ -28,7 +22,7 @@ public class Store implements StoreInterface {
         for(String product:products) {
             if(doesItemExist(product)) {
                 totalCost += getCost(product);
-            } 
+            }
         }
 
         return totalCost;
