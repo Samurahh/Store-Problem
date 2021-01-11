@@ -20,5 +20,5 @@ public class App
     Store - having a map of list of items
     public int getCost;
     public String getName;
-    public int getCost(
+    public int getCost()
  */
