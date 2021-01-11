@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Store implements StoreInterface {
+    
+    public int getCost(String product) {
 
     private HashMap<String, Integer> products;
 
@@ -56,7 +58,29 @@ public class Store implements StoreInterface {
 
     @Override
     public boolean addProducts(Map<String, Integer> products) {
-        return false;
+        int cost = 0;
+        HashMap<String, Integer> products = (HashMap<String, Integer>) getItems();
+
+        if(doesItemExist(product)) {
+            cost = products.get(product);
+        } else {
+            System.out.println(product + " not in inventory");
+        }
+
+        return cost;
+    }
+
+    public int getCost(Collection<String> products) {
+
+        int totalCost = 0;
+        HashMap<String, Integer> productInventory = (HashMap<String, Integer>) getItems();
+
+        for(String product:products) {
+            if(doesItemExist(product)) {
+                totalCost += getCost(product);
+            }
+        }
+        return totalCost;
     }
 
     @Override
