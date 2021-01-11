@@ -13,6 +13,8 @@ public class Store implements StoreInterface {
 
         if(doesItemExist(product)) {
             cost = products.get(product);
+        } else {
+            System.out.println(product + " not in inventory");
         }
 
         return cost;
@@ -26,6 +28,8 @@ public class Store implements StoreInterface {
         for(String product:products) {
             if(doesItemExist(product)) {
                 totalCost += productInventory.get(product);
+            } else {
+                System.out.println(product + " not in inventory");
             }
         }
 
