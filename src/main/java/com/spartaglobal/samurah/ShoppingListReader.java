@@ -1,10 +1,15 @@
 package com.spartaglobal.samurah;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
-public class ShoppingListReader implements FileReaderInterface {
+public class ShoppingListReader implements ShoppingListReaderInterface {
 
     private BufferedReader reader;
 
@@ -13,7 +18,7 @@ public class ShoppingListReader implements FileReaderInterface {
     }
 
     @Override
-    public ArrayList<String> getShoppingList() {
+    public Collection<String> getShoppingList() {
         ArrayList<String> items = new ArrayList<>();
         String line;
         try {
@@ -21,19 +26,18 @@ public class ShoppingListReader implements FileReaderInterface {
                 String[] splitLine = line.split(",");
                 items.addAll(Arrays.asList(splitLine));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        } catch (Exception e) {
+//            e.printStackTrace();
+            return Collections.emptyList();
         }
         return items;
     }
 
     @Override
     public boolean initialize(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
+        if (filePath != null) {
             try {
-                reader = new BufferedReader(new FileReader(file));
+                reader = new BufferedReader(new FileReader(filePath));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 return false;

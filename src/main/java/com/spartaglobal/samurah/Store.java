@@ -39,7 +39,7 @@ public class Store implements StoreInterface {
 
     @Override
     public boolean addProduct(String productName, int price) {
-        if (productName == null || !doesItemExist(productName)) {
+        if (productName == null || doesItemExist(productName)) {
             return false;
         } else if (price > 0) {
             items.put(productName, price);
@@ -52,7 +52,7 @@ public class Store implements StoreInterface {
 
     @Override
     public boolean removeProduct(String productName) {
-        if (productName != null && doesItemExist(productName)) {
+        if (productName != null && !doesItemExist(productName)) {
             items.remove(productName);
             return true;
         }
