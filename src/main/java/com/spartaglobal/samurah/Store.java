@@ -5,39 +5,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Store implements StoreInterface {
-    private final HashMap<String, Integer> products;
+
+    private HashMap<String, Integer> items;
 
     public Store() {
-        products = new HashMap<>();
+        items = new HashMap<>();
     }
 
     @Override
     public int getCost(String product) {
-        return 0;
+        return items.get(product);
     }
 
     @Override
     public int getCost(Collection<String> products) {
-        return 0;
+        int totalCost = 0;
+        for(String product:products) {
+            if(doesItemExist(product)) {
+                totalCost += getCost(product);
+            }
+        }
+        return totalCost;
     }
 
     @Override
     public boolean addProduct(String productName, int price) {
-        if (productName == null || doesItemExist(productName)) {
+        if (productName == null || !doesItemExist(productName)) {
             return false;
         } else if (price > 0) {
-            products.put(productName, price);
+            items.put(productName, price);
             return true;
         } else {
-            System.out.println("Price must be greater than zero.");
+            System.out.println("Price of "+ productName +" must be greater than 0.");
             return false;
         }
     }
 
     @Override
     public boolean removeProduct(String productName) {
-        if (productName != null) {
-            products.remove(productName);
+        if (productName != null && doesItemExist(productName)) {
+            items.remove(productName);
             return true;
         }
         else return false;
@@ -45,24 +52,30 @@ public class Store implements StoreInterface {
 
     @Override
     public Map<String, Integer> getItems() {
-        return products;
+        return items;
     }
 
     @Override
     public boolean doesItemExist(String productName) {
-        return false;
+        return items.containsKey(productName);
     }
 
     @Override
     public boolean addProducts(Map<String, Integer> products) {
-        return false;
+        for (String product : products.keySet()) {
+            if (!items.containsKey(product)) {
+                addProduct(product, products.get(product));
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
+
     @Override
     public boolean removeProducts(Collection<String> products) {
         for (String product : products) {
-            if (doesItemExist(product)) {
-                removeProduct(product);
-            } else {
+            if (!removeProduct(product)) {
                 return false;
             }
         }
