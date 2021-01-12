@@ -81,5 +81,4 @@ public class Store implements StoreInterface {
         }
         return true;
     }
-
 }
