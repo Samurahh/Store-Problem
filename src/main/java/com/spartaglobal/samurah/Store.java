@@ -14,7 +14,16 @@ public class Store implements StoreInterface {
 
     @Override
     public int getCost(String product) {
-        return items.get(product);
+        int cost = 0;
+        HashMap<String, Integer> products = (HashMap<String, Integer>) getItems();
+
+        if(doesItemExist(product)) {
+            cost = products.get(product);
+        } else {
+            System.out.println(product + " not in inventory");
+        }
+
+        return cost;
     }
 
     @Override
